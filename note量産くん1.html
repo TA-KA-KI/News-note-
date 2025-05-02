@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>進化版note量産くん</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background: #f9f9f9; }
+    h1 { font-size: 24px; margin-bottom: 10px; }
+    label { display: block; margin: 10px 0 5px; }
+    select, button, textarea {
+      width: 100%; padding: 8px; margin-bottom: 15px; font-size: 14px;
+    }
+    button { cursor: pointer; background: #0066cc; color: white; border: none; border-radius: 4px; }
+    textarea { height: 200px; resize: vertical; }
+  </style>
+</head>
+<body>
+  <h1>進化版note量産くん</h1><label for="genre">ジャンル</label> <select id="genre"> <option>副業</option> <option>ライフスタイル</option> <option>スピリチュアル</option> <option>ブログ術</option> </select>
+
+<label for="target">ターゲット層</label> <select id="target"> <option>主婦</option> <option>会社員</option> <option>学生</option> <option>副業初心者</option> </select>
+
+<label for="purpose">目的</label> <select id="purpose"> <option>収益</option> <option>共感</option> <option>教育</option> <option>宣伝</option> </select>
+
+<label for="tone">文体（トーン）</label> <select id="tone"> <option>カジュアル</option> <option>熱意系</option> <option>セールス系</option> <option>感情訴求</option> </select>
+
+<label for="intro">導入スタイル</label> <select id="intro"> <option>共感・体験談</option> <option>ショックワード</option> <option>専門解説</option> </select>
+
+<label for="output">出力形式</label> <select id="output"> <option>構成だけ</option> <option>本文まで作成</option> </select>
+
+<button onclick="generateNote()">noteを生成</button>
+
+  <textarea id="result" placeholder="ここに生成されたnoteが表示されます"></textarea><button onclick="copyText()">コピー</button> <button onclick="resetForm()" style="background: #999;">リセット</button>
+
+  <script>
+    function generateNote() {
+      const genre = document.getElementById('genre').value;
+      const target = document.getElementById('target').value;
+      const purpose = document.getElementById('purpose').value;
+      const tone = document.getElementById('tone').value;
+      const intro = document.getElementById('intro').value;
+      const output = document.getElementById('output').value;
+
+      const result =
+        `【ジャンル】${genre}\n【ターゲット】${target}\n【目的】${purpose}\n【トーン】${tone}\n【導入スタイル】${intro}\n\n${output === '構成だけ' ? '以下は構成案です：\n- 導入\n- 本文\n- まとめ' : '以下は本文案です：\n◯◯さん（${target}）が悩んでいた頃、${intro}で始まる体験がきっかけでした...（本文続く）'}`;
+
+      document.getElementById('result').value = result;
+    }
+
+    function copyText() {
+      const textarea = document.getElementById('result');
+      textarea.select();
+      document.execCommand('copy');
+    }
+
+    function resetForm() {
+      document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+      document.getElementById('result').value = '';
+    }
+  </script></body>
+</html>1
